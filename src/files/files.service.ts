@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
 import { FileCategory } from '@prisma/client';
 import { createClient } from '@supabase/supabase-js';
-import { v4 as uuidv4 } from 'uuid';
+import { randomUUID } from 'crypto';
 import * as path from 'path';
 
 @Injectable()
@@ -54,7 +54,7 @@ export class FilesService {
 
         // Generate a unique path: CATEGORY/uuid-filename
         const fileExt = path.extname(originalName);
-        const fileName = `${uuidv4()}${fileExt}`;
+       const fileName = `${randomUUID()}${fileExt}`;
         const filePath = `${category}/${fileName}`;
 
         // Upload to Supabase
